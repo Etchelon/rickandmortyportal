@@ -1,0 +1,38 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	&.mobile {
+		.app-toolbar {
+			position: fixed;
+			z-index: 2;
+		}
+
+		.app-sidenav {
+			width: 75vw;
+		}
+
+		.app-sidenav-container {
+			flex: 1 0 auto;
+		}
+	}
+}
+
+.app-toolbar {
+	.app-name {
+		margin-left: 1rem;
+	}
+}
+
+.app-sidenav {
+	min-width: 200px;
+}
+
+.app-sidenav-container {
+	flex: 1;
+}
