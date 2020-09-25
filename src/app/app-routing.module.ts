@@ -2,25 +2,7 @@ import { InjectionToken, NgModule } from "@angular/core";
 import { Route, RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
-
-export interface AppRoute {
-	path: string;
-	label: string;
-	nesting: number;
-	icon?: string;
-}
-
-export interface RouteMetadata {
-	label: string;
-	hidden?: boolean;
-	icon?: string;
-}
-
-export interface RouteWithMetadata extends Route {
-	metadata: RouteMetadata;
-}
-
-export const APP_ROUTES = new InjectionToken<AppRoute[]>("The list of routes defined in the app");
+import { RouteWithMetadata } from "./routing.types";
 
 export const routes: RouteWithMetadata[] = [
 	{
@@ -49,23 +31,23 @@ export const routes: RouteWithMetadata[] = [
 				redirectTo: "not-found",
 				metadata: { label: "Episodes (not implemented)" },
 			},
+			{
+				path: "not-found",
+				component: NotFoundComponent,
+				metadata: {
+					label: "404 - Not Found",
+					hidden: true,
+				},
+			},
+			{
+				path: "**",
+				redirectTo: "not-found",
+				metadata: {
+					label: "Catch all",
+					hidden: true,
+				},
+			},
 		] as RouteWithMetadata[],
-	},
-	{
-		path: "not-found",
-		component: NotFoundComponent,
-		metadata: {
-			label: "404 - Not Found",
-			hidden: true,
-		},
-	},
-	{
-		path: "**",
-		redirectTo: "not-found",
-		metadata: {
-			label: "Catch all",
-			hidden: true,
-		},
 	},
 ];
 

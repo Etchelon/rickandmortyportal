@@ -29,10 +29,20 @@
 	}
 }
 
-.app-sidenav {
-	min-width: 200px;
-}
-
 .app-sidenav-container {
 	flex: 1;
+}
+
+.app-sidenav {
+	min-width: 200px;
+	width: 15vw;
+}
+
+.app-content {
+	display: flex;
+
+	::ng-deep router-outlet + * {
+		flex: 1;
+		padding: 1rem;
+	}
 }

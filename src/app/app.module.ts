@@ -6,19 +6,12 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import _ from "lodash";
-import { AppRoute, AppRoutingModule, APP_ROUTES, routes as routerRoutes, RouteWithMetadata } from "./app-routing.module";
+import { AppRoutingModule, routes as routerRoutes } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
-
-const trim = (s: string) => s.trim();
-const normalizeEnd = (s: string) => (s.endsWith("/") ? s.substr(0, s.length - 1) : s);
-const normalizeStart = (s: string) => (s.startsWith("/") ? s.substr(0, s.length - 1) : s);
-const normalize = (s: string) => normalizeEnd(normalizeStart(trim(s)));
-
-const joinPaths = (lhs: string, rhs: string) => {
-	return `${normalize(lhs)}/${normalize(rhs)}`;
-};
+import { AppRoute, APP_ROUTES, RouteWithMetadata } from "./routing.types";
+import { joinPaths } from "./utils/url-management";
 
 function getRouteAndChildren(route: RouteWithMetadata, pathSoFar = "/", nesting = 0): AppRoute[] {
 	if (route.metadata.hidden) {

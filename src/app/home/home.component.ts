@@ -1,6 +1,6 @@
 import { MediaMatcher } from "@angular/cdk/layout";
 import { ChangeDetectorRef, Component, HostBinding, Inject, OnDestroy } from "@angular/core";
-import { AppRoute, APP_ROUTES } from "../app-routing.module";
+import { AppRoute, APP_ROUTES } from "../routing.types";
 
 @Component({
 	selector: "home",
@@ -16,8 +16,8 @@ export class HomeComponent implements OnDestroy {
 	private _mobileQueryListener: () => void;
 
 	constructor(@Inject(APP_ROUTES) public routes: AppRoute[], changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-		this.mobileQuery = media.matchMedia("(max-width: 600px)");
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+		this.mobileQuery = media.matchMedia("(max-width: 600px)");
 		this.mobileQuery.addEventListener("change", this._mobileQueryListener);
 	}
 
