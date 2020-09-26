@@ -1,1 +1,14 @@
-<p>character-detail works!</p>
+<div class="header">
+	<h1 class="title">{{ character.name }}</h1>
+</div>
+<div class="body container">
+	<div class="row">
+		<div class="image col-12 col-md-6">
+			<img src="{{ character.image }}" alt="Image of {{ character.name }}">
+		</div>
+		<div class="details col-12 col-md-6">
+			<p>{{ character.gender }} {{ character.species }}</p>
+			<p>Status: {{ character.status }}</p>
+		</div>
+	</div>
+</div>

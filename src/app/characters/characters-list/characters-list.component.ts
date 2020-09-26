@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Observable, Subject } from "rxjs";
 import { finalize, map, mergeMap, tap } from "rxjs/operators";
 import { API_SERVICE, IApiService } from "../../api/api.service";
-import { Character, CharacterStatus, PaginatedResponse } from "../../api/api.types";
+import { Character, PaginatedResponse } from "../../api/api.types";
 
 @Component({
 	selector: "characters-list",
@@ -17,7 +17,7 @@ export class CharactersListComponent implements AfterViewInit, OnDestroy {
 	private _fetchTrigger = new Subject<void>();
 	characters$: Observable<Character[]> = this._fetchTrigger.asObservable().pipe(
 		tap(() => (this.isLoading = true)),
-		mergeMap(() => this.service.all({ page: this._currentPage })),
+		mergeMap(() => this.service.character.all({ page: this._currentPage })),
 		tap(page => this.onDataFetched(page)),
 		map(page => page.results),
 		finalize(() => {
@@ -26,17 +26,6 @@ export class CharactersListComponent implements AfterViewInit, OnDestroy {
 	);
 
 	PAGE_SIZE = 20;
-
-	getStatusColor = _.memoize((status: CharacterStatus): string => {
-		switch (status) {
-			case "Alive":
-				return "accent";
-			case "Dead":
-				return "primary";
-			default:
-				return "";
-		}
-	});
 
 	constructor(@Inject(API_SERVICE) private readonly service: IApiService) {}
 
@@ -52,6 +41,8 @@ export class CharactersListComponent implements AfterViewInit, OnDestroy {
 		this._currentPage = page;
 		this.fetchData();
 	}
+
+	gotoCharacterDetails(id: number): void {}
 
 	private fetchData(): void {
 		this._fetchTrigger.next();
