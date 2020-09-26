@@ -8,6 +8,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import _ from "lodash";
+import { ApiService, API_SERVICE } from "./api/api.service";
 import { AppRoutingModule, routes as routerRoutes } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
@@ -57,6 +58,7 @@ export function getAppRoutes(): AppRoute[] {
 			useFactory: getAppRoutes,
 			deps: [],
 		},
+		{ provide: API_SERVICE, useExisting: ApiService },
 	],
 	bootstrap: [AppComponent],
 })

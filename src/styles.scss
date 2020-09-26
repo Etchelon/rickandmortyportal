@@ -11,3 +11,17 @@ body {
 * {
 	box-sizing: border-box;
 }
+
+::-webkit-scrollbar {
+	width: 0.25em;
+	height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+	background: lighten(#708090, 10%);
+	border-radius: 15px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}

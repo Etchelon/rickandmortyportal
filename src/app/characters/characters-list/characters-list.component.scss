@@ -20,7 +20,25 @@
 	}
 }
 
+$bootstrapGutterSize: 30px;
+
 .list {
 	flex: 1 0 auto;
-	padding: 1rem 0;
+	padding: $bootstrapGutterSize $bootstrapGutterSize / 2 0;
+	position: relative;
+
+	.loader {
+		position: absolute;
+		top: 5px;
+		left: 0;
+		width: 100%;
+	}
+
+	.character {
+		margin-bottom: $bootstrapGutterSize;
+	}
+}
+
+.paginator {
+	flex: 0 0 auto;
 }

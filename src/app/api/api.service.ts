@@ -3,11 +3,10 @@ import { Inject, Injectable, InjectionToken } from "@angular/core";
 import _ from "lodash";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { API_BASE_URL, PaginatedResponse } from "../api/api.types";
 import { joinPaths, querify } from "../utils/url-management";
-import { Character, GetAllFilters } from "./api-types";
+import { API_BASE_URL, Character, GetAllCharactersOptions, PaginatedResponse } from "./api.types";
 
-export interface ICharactersService {
+export interface IApiService {
 	/** Get one or more characters by their ids */
 	one(ids: number): Observable<Character>;
 
@@ -15,13 +14,13 @@ export interface ICharactersService {
 	many(...ids: number[]): Observable<Character[]>;
 
 	/** Get a paginated list of characters */
-	all(): Observable<PaginatedResponse<Character>>;
+	all(options: GetAllCharactersOptions): Observable<PaginatedResponse<Character>>;
 }
 
-export const CHARACTERS_SERVICE = new InjectionToken<ICharactersService>("The service used to retrieve character data");
+export const API_SERVICE = new InjectionToken<IApiService>("The service used to retrieve character data");
 
 @Injectable({ providedIn: "root" })
-export class CharactersService implements ICharactersService {
+export class ApiService implements IApiService {
 	private readonly endpoint: string;
 
 	constructor(private readonly http: HttpClient, @Inject(API_BASE_URL) baseUrl: string) {
@@ -45,8 +44,8 @@ export class CharactersService implements ICharactersService {
 		return this.get<Character[]>(params);
 	}
 
-	all(filters?: GetAllFilters): Observable<PaginatedResponse<Character>> {
-		const params = _.isEmpty(filters) ? "" : querify(filters);
+	all(options: GetAllCharactersOptions): Observable<PaginatedResponse<Character>> {
+		const params = _.isEmpty(options) ? "" : querify(options);
 		return this.get<PaginatedResponse<Character>>(params);
 	}
 

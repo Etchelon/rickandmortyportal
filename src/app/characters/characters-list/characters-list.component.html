@@ -1,28 +1,31 @@
 <div class="header">
-	<h1 class="title">Browse the characters from the series</h1>
+	<h1 class="title">All Characters</h1>
 </div>
 <div class="list">
+	<div *ngIf="isLoading" class="loader">
+		<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+	</div>
 	<div class="container-fluid">
 		<div class="row">
-			<div *ngFor="let character of characters$ | async" class="col col-lg-6 col-xl-4 mb-3">
+			<div *ngFor="let character of characters$ | async" class="character col-12 col-md-6 col-lg-4 col-xl-3">
 				<mat-card>
 					<mat-card-header>
-						<mat-card-title>{{ character.name }}</mat-card-title>
-						<mat-card-subtitle>{{ character.species }}</mat-card-subtitle>
+						<mat-card-title>
+							<span>{{ character.name }}</span>
+						</mat-card-title>
+						<mat-card-subtitle> {{ character.gender }} {{ character.species }} - {{ character.status }} </mat-card-subtitle>
 					</mat-card-header>
 					<img mat-card-image src="{{ character.image }}" alt="Missing photo of {{ character.name }}" />
-					<mat-card-content>
-						<p>
-							The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile
-							dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-						</p>
-					</mat-card-content>
 					<mat-card-actions>
-						<button mat-button>LIKE</button>
-						<button mat-button>SHARE</button>
+						<button mat-button [routerLink]="['../', character.id]">MORE</button>
 					</mat-card-actions>
 				</mat-card>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="paginator">
+	<mat-paginator [length]="totalCharactersCount" [pageSize]="PAGE_SIZE" [pageSizeOptions]="[20]"
+		(page)="onPageSelected($event.pageIndex + 1)">
+	</mat-paginator>
 </div>
