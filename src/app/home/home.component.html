@@ -9,7 +9,7 @@
     <mat-sidenav #snav class="app-sidenav"
         [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
 		<mat-nav-list>
-            <a *ngFor="let route of routes" mat-list-item
+            <a *ngFor="let route of routes" mat-list-item (click)="mobileQuery.matches && snav.close()"
                 routerLink="{{ route.path }}" routerLinkActive="active-route"
                 [style.padding-left]="(route.nesting) + 'rem'">
                 {{ route.label }}

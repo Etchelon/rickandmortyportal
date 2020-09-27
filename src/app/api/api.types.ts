@@ -30,7 +30,16 @@ export interface PaginatedResponse<T> {
 	results: T[];
 }
 
-//#region Characters
+export interface ApiEntity {
+	/** The id of the entity */
+	id: number;
+	/** Link to the entity's own endpoint */
+	url: string;
+	/** Time at which the entity was created in the database */
+	created: string;
+}
+
+//#region Character
 
 export type CharacterStatus = "Alive" | "Dead" | "unknown";
 export type CharacterGender = "Female" | "Male" | "Genderless" | "unknown";
@@ -42,8 +51,7 @@ export interface LocationReference {
 /**
  * Interface describing the shape of a Character object returned by the APIs
  */
-export interface Character {
-	id: number;
+export interface Character extends ApiEntity {
 	name: string;
 	status: CharacterStatus;
 	species: string;
@@ -53,8 +61,6 @@ export interface Character {
 	location: LocationReference;
 	image: string;
 	episode: string[];
-	url: string;
-	created: string;
 }
 
 /**
@@ -66,6 +72,51 @@ export interface GetAllCharactersOptions extends PaginatedRequestOptions {
 	species?: string;
 	type?: string;
 	gender?: CharacterGender;
+}
+
+//#endregion
+
+//#region Location
+
+/**
+ * Interface describing the shape of a Location object returned by the APIs
+ */
+export interface Location extends ApiEntity {
+	name: string;
+	type: string;
+	dimension: string;
+	residents: string[];
+}
+
+/**
+ * Interface describing the shape of the filters accepted by the GetAll API
+ */
+export interface GetAllLocationsOptions extends PaginatedRequestOptions {
+	name?: string;
+	type?: string;
+	dimension?: string;
+}
+
+//#endregion
+
+//#region Episode
+
+/**
+ * Interface describing the shape of an Episode object returned by the APIs
+ */
+export interface Episode extends ApiEntity {
+	name: string;
+	air_date: string;
+	episode: string;
+	characters: string[];
+}
+
+/**
+ * Interface describing the shape of the filters accepted by the GetAll API
+ */
+export interface GetAllEpisodesOptions extends PaginatedRequestOptions {
+	name?: string;
+	episode?: string;
 }
 
 //#endregion

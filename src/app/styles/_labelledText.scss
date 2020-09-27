@@ -1,0 +1,13 @@
+.labelled-text {
+	display: block;
+	margin-bottom: 1rem;
+
+	.label {
+		margin-bottom: 0.5rem;
+		color: gray;
+	}
+
+	.text {
+		font-size: 1.1em;
+	}
+}

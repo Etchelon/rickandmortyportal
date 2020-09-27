@@ -8,6 +8,9 @@ import { PaginatedRequestOptions, PaginatedResponse } from "./api.types";
  * Interface describing a resource in the RickAndMorty APIs
  */
 export interface IApiResource<T, U extends PaginatedRequestOptions = PaginatedRequestOptions> {
+	/** Get one T by its url */
+	byUrl(url: string): Observable<T>;
+
 	/** Get one or more Ts by their ids */
 	one(ids: number): Observable<T>;
 
@@ -23,6 +26,10 @@ export class ApiResource<T, TOptions extends PaginatedRequestOptions> implements
 
 	constructor(private readonly http: HttpClient, baseUrl: string, resourceName: string) {
 		this.endpoint = joinPaths(baseUrl, resourceName);
+	}
+
+	byUrl(url: string): Observable<T> {
+		return this.http.get<T>(url);
 	}
 
 	one(id: number): Observable<T> {

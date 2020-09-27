@@ -3,12 +3,42 @@
 </div>
 <div class="body container">
 	<div class="row">
-		<div class="image col-12 col-md-6">
-			<img src="{{ character.image }}" alt="Image of {{ character.name }}">
+		<div class="image col-12 col-md-6 mb-3">
+			<img src="{{ character.image }}" alt="Image of {{ character.name }}" />
 		</div>
-		<div class="details col-12 col-md-6">
-			<p>{{ character.gender }} {{ character.species }}</p>
-			<p>Status: {{ character.status }}</p>
+		<div class="details col-12 col-md-6 mb-3">
+			<h2>Personal Information</h2>
+			<div class="labelled-text">
+				<p class="label">Gender:</p>
+				<div class="text">{{ character.gender }}</div>
+			</div>
+			<div class="labelled-text">
+				<p class="label">Species:</p>
+				<div class="text">{{ character.species }}</div>
+			</div>
+			<div *ngIf="character.type" class="labelled-text">
+				<p class="label">Type</p>
+				<div class="text">{{ character.type }}</div>
+			</div>
+			<div class="labelled-text">
+				<p class="label">Status:</p>
+				<div class="text">{{ character.status }}</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="locations col-12 col-md-6 mb-3">
+			<h2>Notable places</h2>
+			<location-reference label="First spotted at" [reference]="character.origin"></location-reference>
+			<location-reference label="Currently at" [reference]="character.location"></location-reference>
+		</div>
+		<div class="episodes col-12 col-md-6 mb-3">
+			<h2>Features in episodes</h2>
+			<div class="list">
+				<div *ngFor="let episode of character.episode" class="episode">
+					{{ episode }}
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

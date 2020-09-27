@@ -1,5 +1,5 @@
-import { InjectionToken, NgModule } from "@angular/core";
-import { Route, RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { RouteWithMetadata } from "./routing.types";

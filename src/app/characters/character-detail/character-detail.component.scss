@@ -5,7 +5,7 @@
 @import "../../styles/pageHeader";
 
 .body {
-	padding: 15px 0;
+	padding: 15px;
 }
 
 .image {
@@ -17,4 +17,12 @@
 		width: 300px;
 		height: 300px;
 	}
+}
+
+.details {
+	@import "../../styles/labelledText";
+}
+
+.locations location-reference {
+	margin-bottom: 1rem;
 }

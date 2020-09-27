@@ -1,0 +1,22 @@
+<div class="header">
+	<h4 class="label">{{ label }}: {{ reference.name }}</h4>
+</div>
+<div *ngIf="loaded; else loader" class="details">
+	<div *ngIf="location.type" class="labelled-text">
+		<p class="label">Type:</p>
+		<div class="text">{{ location.type }}</div>
+	</div>
+	<div class="labelled-text">
+		<p class="label">Dimension:</p>
+		<div class="text">{{ location.dimension }}</div>
+	</div>
+	<div class="labelled-text">
+		<p class="label">N. of residents:</p>
+		<div class="text">{{ location.residents?.length || "unknown" }}</div>
+	</div>
+</div>
+<ng-template #loader>
+	<div class="loader">
+		<mat-progress-spinner [diameter]="20"></mat-progress-spinner>
+	</div>
+</ng-template>
