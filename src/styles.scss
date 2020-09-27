@@ -25,3 +25,8 @@ body {
 ::-webkit-scrollbar-track {
 	background: transparent;
 }
+
+.loader {
+	display: flex;
+	justify-content: center;
+}

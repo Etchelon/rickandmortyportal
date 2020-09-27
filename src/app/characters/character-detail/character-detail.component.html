@@ -33,12 +33,18 @@
 			<location-reference label="Currently at" [reference]="character.location"></location-reference>
 		</div>
 		<div class="episodes col-12 col-md-6 mb-3">
-			<h2>Features in episodes</h2>
-			<div class="list">
-				<div *ngFor="let episode of character.episode" class="episode">
-					{{ episode }}
+			<h2>Featured in episodes</h2>
+			<div *ngIf="hasLoadedEpisodes; else loader" class="list">
+				<div *ngFor="let episode of charactersEpisodes" class="episode c-pointer" [routerLink]="['/episodes', episode.id]">
+					{{ episode.name }}
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<ng-template #loader>
+	<div class="loader">
+		<mat-spinner [diameter]="30"></mat-spinner>
+	</div>
+</ng-template>

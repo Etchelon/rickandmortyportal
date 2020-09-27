@@ -12,6 +12,9 @@ import {
 	Location,
 } from "./api.types";
 
+/**
+ * Interface describing the service used to query all RickAndMorty API resources
+ */
 export interface IApiService {
 	character: IApiResource<Character, GetAllCharactersOptions>;
 	location: IApiResource<Location, GetAllLocationsOptions>;

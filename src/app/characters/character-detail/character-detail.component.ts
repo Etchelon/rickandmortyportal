@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Character } from "../../api/api.types";
+import _ from "lodash";
+import { API_SERVICE, IApiService } from "src/app/api/api.service";
+import { Character, Episode } from "../../api/api.types";
 
 @Component({
 	selector: "character-detail",
@@ -9,10 +11,16 @@ import { Character } from "../../api/api.types";
 })
 export class CharacterDetailComponent implements OnInit {
 	character!: Character;
+	charactersEpisodes: Episode[] = [];
+	hasLoadedEpisodes = false;
 
-	constructor(private readonly route: ActivatedRoute) {}
+	constructor(private readonly route: ActivatedRoute, @Inject(API_SERVICE) private readonly apiService: IApiService) {}
 
 	ngOnInit(): void {
 		this.character = this.route.snapshot.data.character;
+		this.apiService.episode.manyByUrls(this.character.episode).subscribe(episodes => {
+			this.charactersEpisodes = episodes;
+			this.hasLoadedEpisodes = true;
+		});
 	}
 }

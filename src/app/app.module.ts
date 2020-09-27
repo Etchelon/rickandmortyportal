@@ -16,6 +16,9 @@ import { NotFoundComponent } from "./not-found/not-found.component";
 import { AppRoute, APP_ROUTES, RouteWithMetadata } from "./routing.types";
 import { joinPaths } from "./utils/url-management";
 
+/**
+ * Given a route, returns a flat list of AppRoute objects with proper paths and nesting
+ */
 function getRouteAndChildren(route: RouteWithMetadata, pathSoFar = "/", nesting = 0): AppRoute[] {
 	if (route.metadata.hidden) {
 		return [];
@@ -32,6 +35,9 @@ function getRouteAndChildren(route: RouteWithMetadata, pathSoFar = "/", nesting 
 	];
 }
 
+/**
+ * Returns the list of AppRoutes, extracted from the router's configuration
+ */
 export function getAppRoutes(): AppRoute[] {
 	return _.chain(routerRoutes)
 		.map(r => getRouteAndChildren(r))

@@ -11,8 +11,8 @@ import { Location, LocationReference } from "../../../api/api.types";
 export class LocationReferenceComponent implements OnInit {
 	@Input() label!: string;
 	@Input() reference!: LocationReference;
-	location: Location;
-	loaded = false;
+	location: Location | undefined;
+	isLoading = false;
 
 	constructor(@Inject(API_SERVICE) private readonly service: IApiService) {}
 
@@ -21,9 +21,14 @@ export class LocationReferenceComponent implements OnInit {
 	}
 
 	private fetchLocation(): void {
-		this.service.location.byUrl(this.reference.url).subscribe(location => {
+		if (!this.reference.url) {
+			return;
+		}
+
+		this.isLoading = true;
+		this.service.location.oneByUrl(this.reference.url).subscribe(location => {
 			this.location = location;
-			this.loaded = true;
+			this.isLoading = false;
 		});
 	}
 }

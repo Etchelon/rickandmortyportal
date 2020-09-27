@@ -2,11 +2,9 @@ import { enableProdMode } from "@angular/core";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { API_BASE_URL } from "./app/api/api.types";
 import { AppModule } from "./app/app.module";
-import { environment } from "./environments/environment";
 
-if (environment.production) {
-	enableProdMode();
-}
+// Disable double CD checks in Angular
+enableProdMode();
 
 export function getApiBaseUrl(): string {
 	const url = document.getElementsByTagName("api-endpoint")[0]?.getAttribute("href");

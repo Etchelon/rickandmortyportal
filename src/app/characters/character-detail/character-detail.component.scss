@@ -26,3 +26,22 @@
 .locations location-reference {
 	margin-bottom: 1rem;
 }
+
+.episodes {
+	.list {
+		display: flex;
+		flex-flow: row wrap;
+
+		.episode {
+			margin: {
+				bottom: 0.5rem;
+				right: 0.5rem;
+			}
+			padding: 0.25rem 0.75rem;
+			border-radius: 10px;
+			background-color: dodgerblue;
+			color: white;
+			cursor: pointer;
+		}
+	}
+}

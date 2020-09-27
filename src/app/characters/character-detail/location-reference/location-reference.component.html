@@ -1,7 +1,7 @@
 <div class="header">
 	<h4 class="label">{{ label }}: {{ reference.name }}</h4>
 </div>
-<div *ngIf="loaded; else loader" class="details">
+<div *ngIf="location" class="details">
 	<div *ngIf="location.type" class="labelled-text">
 		<p class="label">Type:</p>
 		<div class="text">{{ location.type }}</div>
@@ -15,8 +15,6 @@
 		<div class="text">{{ location.residents?.length || "unknown" }}</div>
 	</div>
 </div>
-<ng-template #loader>
-	<div class="loader">
-		<mat-progress-spinner [diameter]="20"></mat-progress-spinner>
-	</div>
-</ng-template>
+<div *ngIf="isLoading" class="loader">
+	<mat-spinner [diameter]="30"></mat-spinner>
+</div>
