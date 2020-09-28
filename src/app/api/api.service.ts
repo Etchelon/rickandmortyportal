@@ -31,7 +31,7 @@ export class ApiService implements IApiService {
 
 	constructor(http: HttpClient, @Inject(API_BASE_URL) baseUrl: string) {
 		this.character = new ApiResource<Character, GetAllCharactersOptions>(http, baseUrl, "character");
-		this.location = new ApiResource<Location, GetAllLocationsOptions>(http, baseUrl, "locations");
+		this.location = new ApiResource<Location, GetAllLocationsOptions>(http, baseUrl, "location");
 		this.episode = new ApiResource<Episode, GetAllEpisodesOptions>(http, baseUrl, "episode");
 	}
 }
